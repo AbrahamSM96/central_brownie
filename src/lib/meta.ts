@@ -239,7 +239,7 @@ export async function getSocialStats(
       followers: fb?.followers_count ?? 0,
       likes: fb?.fan_count ?? 0,
       name: fb?.name ?? 'Central Brownie',
-      profileUrl: fbProfileUrl,
+      profileUrl: 'https://www.facebook.com/centrallbrownies',
     },
     instagram: {
       followers: ig?.followers_count ?? 0,

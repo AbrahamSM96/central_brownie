@@ -3,13 +3,19 @@ import '../styles/global.css'
 
 interface Props {
   description?: string
+  image?: string
   title: string
 }
 
 const {
-  description = 'Postres artesanales: mini cakes, brownies, pays y más.',
+  description = 'Postres artesanales hechos a pedido: brownies, cheesecakes, cupcakes, pasteles y galletas. Frescos, únicos y con mucho amor.',
+  image = '/central_brownie_logo.jpg',
   title,
 } = Astro.props
+
+const siteUrl = import.meta.env.SITE_URL ?? 'https://central-brownie-git-main-abraham-serranos-projects.vercel.app'
+const pageTitle = `${title} | Central Brownie`
+const ogImage = `${siteUrl}${image}`
 ---
 
 <!doctype html>
@@ -19,13 +25,30 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Central Brownie" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
-    <title>{title} | Central Brownie</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
     <slot />

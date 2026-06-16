@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout
+  description="Descarga o consulta el menú completo de Central Brownie: brownies, cheesecakes, cupcakes, pasteles y galletas artesanales."
+  image="/central_brownie_logo.jpg"
+  title="Menú"
+>
+  <main class="flex min-h-screen flex-col bg-brownie-900">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between px-6 py-4">
+      <a class="flex items-center gap-2 no-underline" href="/">
+        <img alt="Central Brownie" class="h-9 w-9 rounded-full object-cover" src="/centralB_logo.png" />
+        <span class="font-display text-lg font-bold text-white">Central Brownie</span>
+      </a>
+      <a
+        class="rounded-full bg-rose-400 px-5 py-2 text-sm font-medium text-brownie-900 transition-all hover:bg-rose-100"
+        download
+        href="/menu.pdf"
+      >
+        Descargar PDF
+      </a>
+    </div>
+
+    <!-- PDF viewer -->
+    <div class="flex-1 px-4 pb-6">
+      <iframe
+        class="h-[calc(100vh-80px)] w-full rounded-xl border-0"
+        src="/menu.pdf"
+        title="Menú Central Brownie"
+      ></iframe>
+    </div>
+
+  </main>
+</Layout>

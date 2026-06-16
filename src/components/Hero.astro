@@ -1,0 +1,78 @@
+---
+---
+
+<section class="relative overflow-hidden bg-cream px-6 pb-24 pt-20">
+  <!-- Decorative blobs -->
+  <div
+    class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-rose-400 opacity-20 blur-3xl"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-brownie-100 opacity-40 blur-3xl"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl">
+    <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
+      <!-- Badge -->
+      <div
+        class="mb-6 inline-flex items-center gap-2 rounded-full border border-rose-400/40 bg-rose-100 px-4 py-1.5"
+      >
+        <span class="text-sm">✦</span>
+        <span class="text-xs font-medium tracking-widest text-brownie-700 uppercase">
+          Postres Artesanales · Hecho con Amor
+        </span>
+        <span class="text-sm">✦</span>
+      </div>
+
+      <!-- Headline -->
+      <h1
+        class="font-display max-w-3xl text-5xl font-bold text-brownie-900 leading-tight sm:text-6xl lg:text-7xl"
+      >
+        Dulces que
+        <br />
+        <em class="font-bold not-italic text-brownie-700">enamoran</em>
+        <br />
+        cada bocado.
+      </h1>
+
+      <!-- Subtext -->
+      <p class="mt-6 max-w-xl text-lg text-brownie-700/70 leading-relaxed">
+        Brownies húmedos, mini pasteles de ensueño, cheesecakes cremosos y más — elaborados a mano
+        con los mejores ingredientes para que cada antojo sea memorable.
+      </p>
+
+      <!-- CTAs -->
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a
+          class="rounded-2xl bg-brownie-700 px-8 py-4 font-semibold text-white shadow-sm transition-all hover:bg-brownie-900 hover:shadow-md active:scale-[0.98]"
+          href="#productos"
+        >
+          Explorar postres
+        </a>
+        <a
+          class="rounded-2xl border border-brownie-700/30 bg-white/60 px-8 py-4 font-medium text-brownie-700 transition-all hover:border-brownie-700 hover:bg-white active:scale-[0.98]"
+          href="#como-ordenar"
+        >
+          ¿Cómo ordenar?
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-14 flex flex-wrap gap-8">
+        {
+          [
+            { label: 'Sabores disponibles', value: '10+' },
+            { label: 'Clientes felices', value: '500+' },
+            { label: 'Hecho con amor', value: '100%' },
+          ].map(({ label, value }) => (
+            <div class="flex flex-col">
+              <span class="font-display text-3xl font-bold text-brownie-700">{value}</span>
+              <span class="text-sm text-brownie-700/60">{label}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

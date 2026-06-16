@@ -1,0 +1,38 @@
+---
+import CartSidebar from '../components/CartSidebar'
+import CategoryGrid from '../components/CategoryGrid.astro'
+import Footer from '../components/Footer.astro'
+import Hero from '../components/Hero.astro'
+import HowItWorks from '../components/HowItWorks.astro'
+import Navbar from '../components/Navbar.astro'
+import ProductsSection from '../components/ProductsSection.astro'
+import SocialSection from '../components/SocialSection.astro'
+import { mockProducts } from '../data/products'
+import Layout from '../layouts/Layout.astro'
+import { fetchProductsFromSheets } from '../lib/sheets'
+
+export const prerender = true
+
+const sheetId = import.meta.env.GOOGLE_SHEETS_ID
+const fetched = sheetId ? await fetchProductsFromSheets(sheetId) : []
+const all = fetched.length > 0 ? fetched : mockProducts
+const products = all.filter((p) => p.featured).slice(0, 6)
+---
+
+<Layout
+  description="Postres artesanales: brownies húmedos, mini pasteles, cheesecakes cremosos y pays. Pide por WhatsApp."
+  title="Inicio"
+>
+  <Navbar />
+  <CartSidebar client:load />
+
+  <main>
+    <Hero />
+    <CategoryGrid />
+    <ProductsSection products={products} />
+    <HowItWorks />
+    <SocialSection />
+  </main>
+
+  <Footer />
+</Layout>

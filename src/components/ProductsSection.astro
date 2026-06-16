@@ -1,0 +1,47 @@
+---
+import type { Product } from '../data/products'
+import ProductCard from './ProductCard'
+
+interface Props {
+  heading?: string
+  products: Product[]
+  subheading?: string
+}
+
+const {
+  heading = 'Los más pedidos.',
+  products,
+  subheading = 'Cada postre es elaborado a pedido para que siempre llegue fresco.',
+} = Astro.props
+---
+
+<section class="bg-cream px-6 py-20" id="productos">
+  <div class="mx-auto max-w-6xl">
+    <!-- Section header -->
+    <div class="mb-12 text-center">
+      <p class="mb-2 text-xs font-semibold tracking-widest text-brownie-700/50 uppercase">
+        Catálogo
+      </p>
+      <h2 class="font-display text-4xl font-bold text-brownie-900 sm:text-5xl">
+        {heading}
+      </h2>
+      <p class="mt-3 text-brownie-700/60">{subheading}</p>
+    </div>
+
+    <!-- Products grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {products.map((product) => <ProductCard client:visible product={product} />)}
+    </div>
+
+    <!-- Link to full catalog -->
+    <div class="mt-12 text-center">
+      <a
+        class="inline-flex items-center gap-2 rounded-full border border-brownie-700 px-8 py-3 text-sm font-medium text-brownie-700 transition-all hover:bg-brownie-700 hover:text-white"
+        href="/productos"
+      >
+        Ver catálogo completo
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>

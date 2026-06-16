@@ -1,0 +1,26 @@
+---
+import { categories } from '../data/products'
+---
+
+<section class="bg-white px-6 py-16">
+  <div class="mx-auto max-w-6xl">
+    <p class="mb-10 text-center text-xs font-semibold tracking-widest text-brownie-700/50 uppercase">
+      Nuestras categorías
+    </p>
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      {
+        categories.map(({ emoji, id, label }) => (
+          <a
+            class="group flex flex-col items-center gap-3 rounded-2xl border border-brownie-100 bg-cream px-4 py-8 text-center transition-all hover:border-brownie-700/30 hover:bg-rose-100 hover:shadow-sm"
+            href={`#${id}`}
+          >
+            <span class="text-4xl transition-transform duration-200 group-hover:scale-110">
+              {emoji}
+            </span>
+            <span class="text-sm font-semibold text-brownie-900">{label}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import CartSidebar from '../components/CartSidebar'
+import Footer from '../components/Footer.astro'
+import Navbar from '../components/Navbar.astro'
+import ProductCatalog from '../components/ProductCatalog'
+import { mockProducts } from '../data/products'
+import Layout from '../layouts/Layout.astro'
+import { fetchProductsFromSheets } from '../lib/sheets'
+
+export const prerender = true
+
+const sheetId = import.meta.env.GOOGLE_SHEETS_ID
+const fetched = sheetId ? await fetchProductsFromSheets(sheetId) : []
+const products = fetched.length > 0 ? fetched : mockProducts
+---
+
+<Layout
+  description="Catálogo completo de postres artesanales: brownies, cheesecakes, cupcakes, pasteles y galletas. Todos hechos a pedido."
+  title="Catálogo"
+>
+  <Navbar />
+  <CartSidebar client:load />
+
+  <main class="min-h-screen">
+    <div class="bg-brownie-900 px-6 py-16 text-center">
+      <p class="mb-2 text-xs font-semibold tracking-widest text-rose-400/70 uppercase">
+        Menú completo
+      </p>
+      <h1 class="font-display text-4xl font-bold text-white sm:text-5xl">
+        Catálogo de productos
+      </h1>
+      <p class="mt-3 text-brownie-100/60">
+        Todos nuestros postres son elaborados a pedido con un día de anticipación.
+      </p>
+    </div>
+
+    <section class="bg-cream px-6 py-16">
+      <div class="mx-auto max-w-6xl">
+        <ProductCatalog client:load products={products} />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

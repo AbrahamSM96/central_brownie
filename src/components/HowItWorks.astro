@@ -1,0 +1,53 @@
+---
+const steps = [
+  {
+    description: 'Navega nuestro catálogo y agrega a tu carrito todo lo que se te antoje.',
+    emoji: '🛍️',
+    step: '01',
+    title: 'Elige tus postres',
+  },
+  {
+    description:
+      'Revisa tu selección, ajusta cantidades y confirma el total de tu pedido.',
+    emoji: '✅',
+    step: '02',
+    title: 'Revisa tu pedido',
+  },
+  {
+    description:
+      'Con un clic enviamos tu pedido por WhatsApp y coordinamos la entrega directamente contigo.',
+    emoji: '💬',
+    step: '03',
+    title: 'Pide por WhatsApp',
+  },
+]
+---
+
+<section class="bg-white px-6 py-20" id="como-ordenar">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-14 text-center">
+      <p class="mb-2 text-xs font-semibold tracking-widest text-brownie-700/50 uppercase">
+        Simple y rápido
+      </p>
+      <h2 class="font-display text-4xl font-bold text-brownie-900 sm:text-5xl">
+        ¿Cómo ordenar?
+      </h2>
+      <p class="mt-3 text-brownie-700/60">Sin cuentas, sin complicaciones. Solo elige y pide.</p>
+    </div>
+
+    <div class="grid gap-8 sm:grid-cols-3">
+      {
+        steps.map(({ description, emoji, step, title }) => (
+          <div class="relative flex flex-col gap-4 rounded-2xl border border-brownie-100 bg-cream p-8">
+            <span class="font-display absolute right-6 top-6 text-5xl font-bold text-brownie-100">
+              {step}
+            </span>
+            <span class="text-4xl">{emoji}</span>
+            <h3 class="font-display text-xl font-bold text-brownie-900">{title}</h3>
+            <p class="text-sm text-brownie-700/70 leading-relaxed">{description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

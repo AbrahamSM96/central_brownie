@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-brownie-900: #3d1f0d;
+  --color-brownie-700: #825840;
+  --color-brownie-500: #a07050;
+  --color-brownie-100: #f5e6dc;
+  --color-rose-400: #f5c5bb;
+  --color-rose-100: #fde8e4;
+  --color-cream: #fff8f5;
+
+  /* Fonts */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+/* ─── Featured post glow animation ─────────────────────────────────────────── */
+
+@property --glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes glow-spin {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+
+.featured-glow-ring {
+  animation: glow-spin 4s linear infinite;
+  background: conic-gradient(
+    from var(--glow-angle),
+    transparent 0deg,
+    transparent 200deg,
+    #825840 248deg,
+    #f5c5bb 280deg,
+    #825840 312deg,
+    transparent 360deg
+  );
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-brownie-900);
+  font-family: var(--font-body);
+}

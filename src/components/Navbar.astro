@@ -1,0 +1,30 @@
+---
+import CartButton from './CartButton'
+---
+
+<header class="sticky top-0 z-30 w-full border-b border-brownie-100/60 bg-cream/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a class="flex items-center gap-2 no-underline" href="/">
+      <img alt="Central Brownie" class="h-9 w-9 rounded-full object-cover" src="/centralB_logo.png" />
+      <span class="font-display text-xl font-bold text-brownie-900 tracking-tight">
+        Central Brownie
+      </span>
+    </a>
+
+    <div class="flex items-center gap-6">
+      <a
+        class="hidden text-sm font-medium text-brownie-700 transition-colors hover:text-brownie-900 sm:block"
+        href="/productos"
+      >
+        Postres
+      </a>
+      <a
+        class="hidden text-sm font-medium text-brownie-700 transition-colors hover:text-brownie-900 sm:block"
+        href="/#como-ordenar"
+      >
+        ¿Cómo ordenar?
+      </a>
+      <CartButton client:load />
+    </div>
+  </nav>
+</header>

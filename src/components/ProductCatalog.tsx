@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { categories } from '../data/products'
-import type { Product } from '../data/products'
+import type { CategoryId, Product } from '../data/products'
 import { addToCart } from '../stores/cart'
 
 function ProductCard({ product }: { product: Product }) {
@@ -44,10 +44,11 @@ function ProductCard({ product }: { product: Product }) {
             <span className="ml-1 text-xs font-normal text-brownie-700/60">MXN</span>
           </span>
           <button
+            aria-label={`Agregar ${name} al carrito`}
             className="flex items-center gap-1.5 rounded-full bg-brownie-700 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-brownie-900 active:scale-95"
             onClick={handleAdd}
           >
-            <span>+</span> Agregar
+            <span aria-hidden="true">+</span> Agregar
           </button>
         </div>
       </div>
@@ -59,8 +60,16 @@ interface Props {
   products: Product[]
 }
 
+const validCategoryIds = categories.map((c) => c.id) as readonly string[]
+
+function getCategoryFromUrl(): CategoryId | null {
+  if (typeof window === 'undefined') return null
+  const param = new URLSearchParams(window.location.search).get('category')
+  return validCategoryIds.includes(param ?? '') ? (param as CategoryId) : null
+}
+
 export default function ProductCatalog({ products }: Props) {
-  const [active, setActive] = useState<string | null>(null)
+  const [active, setActive] = useState<CategoryId | null>(getCategoryFromUrl)
 
   const filtered = active ? products.filter((p) => p.category === active) : products
 

@@ -3,7 +3,7 @@ import CartButton from './CartButton'
 ---
 
 <header class="sticky top-0 z-30 w-full border-b border-brownie-100/60 bg-cream/80 backdrop-blur-md">
-  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+  <nav aria-label="Navegacion principal" class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a class="flex items-center gap-2 no-underline" href="/">
       <img alt="Central Brownie" class="h-9 w-9 rounded-full object-cover" src="/centralB_logo.png" />
       <span class="font-display text-xl font-bold text-brownie-900 tracking-tight">
@@ -31,6 +31,79 @@ import CartButton from './CartButton'
         Menú
       </a>
       <CartButton client:load />
+      <!-- Mobile menu toggle -->
+      <button
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Abrir menu"
+        class="flex h-9 w-9 items-center justify-center rounded-full text-brownie-700 transition-colors hover:bg-rose-100 sm:hidden"
+        id="mobile-menu-button"
+        type="button"
+      >
+        <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile menu (grid trick: 0 -> 1fr animates unknown height) -->
+  <div
+    class="grid sm:hidden [grid-template-rows:0fr] transition-[grid-template-rows] duration-300 ease-in-out"
+    id="mobile-menu"
+  >
+    <div class="overflow-hidden">
+      <ul class="flex flex-col gap-1 border-t border-brownie-100/60 bg-cream/95 px-6 py-4" role="list">
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 text-sm font-medium text-brownie-700 transition-colors hover:bg-rose-100 hover:text-brownie-900"
+            href="/productos"
+          >
+            Postres
+          </a>
+        </li>
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 text-sm font-medium text-brownie-700 transition-colors hover:bg-rose-100 hover:text-brownie-900"
+            href="/#como-ordenar"
+          >
+            ¿Cómo ordenar?
+          </a>
+        </li>
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 text-sm font-medium text-brownie-700 transition-colors hover:bg-rose-100 hover:text-brownie-900"
+            href="/menu"
+          >
+            Menú
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
+
+<script>
+  const button = document.getElementById('mobile-menu-button')
+  const menu = document.getElementById('mobile-menu')
+
+  function openMenu() {
+    menu?.style.setProperty('grid-template-rows', '1fr')
+    button?.setAttribute('aria-expanded', 'true')
+    button?.setAttribute('aria-label', 'Cerrar menu')
+  }
+
+  function closeMenu() {
+    menu?.style.setProperty('grid-template-rows', '0fr')
+    button?.setAttribute('aria-expanded', 'false')
+    button?.setAttribute('aria-label', 'Abrir menu')
+  }
+
+  button?.addEventListener('click', () => {
+    button.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu()
+  })
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu)
+  })
+</script>

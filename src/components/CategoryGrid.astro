@@ -12,7 +12,7 @@ import { categories } from '../data/products'
         categories.map(({ emoji, id, label }) => (
           <a
             class="group flex flex-col items-center gap-3 rounded-2xl border border-brownie-100 bg-cream px-4 py-8 text-center transition-all hover:border-brownie-700/30 hover:bg-rose-100 hover:shadow-sm"
-            href={`#${id}`}
+            href={`/productos?category=${id}`}
           >
             <span class="text-4xl transition-transform duration-200 group-hover:scale-110">
               {emoji}

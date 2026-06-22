@@ -18,6 +18,12 @@
       "sourceType": "github",
       "skillPath": "skills/ui-ux-pro-max/SKILL.md",
       "computedHash": "703dda85be57e33ee32212488e017be0863bc796dfbe41bfad273e457648d42a"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
     }
   }
 }

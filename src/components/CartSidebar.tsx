@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 import { useStore } from '@nanostores/react'
 
 import { WHATSAPP_NUMBER } from '../config'
@@ -15,6 +17,55 @@ export default function CartSidebar() {
   const items = useStore(cartItems)
   const open = useStore(cartOpen)
   const total = useStore(cartTotal)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<Element | null>(null)
+
+  useEffect(() => {
+    if (open) {
+      triggerRef.current = document.activeElement
+      closeButtonRef.current?.focus()
+    } else {
+      if (triggerRef.current instanceof HTMLElement) {
+        triggerRef.current.focus()
+      }
+      triggerRef.current = null
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        cartOpen.set(false)
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const aside = closeButtonRef.current?.closest('aside')
+      if (!aside) return
+      const focusable = aside.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last?.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => { document.removeEventListener('keydown', handleKeyDown) }
+  }, [open])
 
   function handleWhatsApp() {
     const url = buildWhatsAppUrl(items, total, WHATSAPP_NUMBER)
@@ -35,9 +86,11 @@ export default function CartSidebar() {
       {/* Sidebar */}
       <aside
         aria-label="Carrito de compras"
+        aria-modal={open ? 'true' : undefined}
         className={`fixed right-0 top-0 z-50 flex h-full w-full max-w-sm flex-col bg-cream shadow-2xl transition-transform duration-300 ease-in-out ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
+        role="dialog"
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-brownie-100 px-6 py-5">
@@ -48,6 +101,7 @@ export default function CartSidebar() {
             )}
           </div>
           <button
+            ref={closeButtonRef}
             aria-label="Cerrar carrito"
             className="flex h-8 w-8 items-center justify-center rounded-full text-brownie-700 transition-colors hover:bg-rose-100"
             onClick={() => { cartOpen.set(false) }}
